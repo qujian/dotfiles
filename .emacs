@@ -68,6 +68,7 @@
 
 ;;Markdown mode
 (add-to-list 'load-path ".emacs.d/plugins/markdown-mode")
+(require 'markdown-mode)
 
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
