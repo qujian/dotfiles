@@ -1,18 +1,21 @@
-;; -----------------------------------------------------------------------------
+;; --------------------------------------------------------------------------
 ;; setting font for mac system
-;; -----------------------------------------------------------------------------
+;; --------------------------------------------------------------------------
 ;; Setting English Font 
 (set-face-attribute
- 'default nil :font "Monaco 14")
-;; Chinese Font 配制中文字体
-;(dolist (charset '(kana han symbol cjk-misc bopomofo))
-;  (set-fontset-font (frame-parameter nil 'font)
-;                    charset
-;                    (font-spec :family "Kaiti SC" :size 16)))
-;; Note: you can chang "Kaiti SC" to "Microsoft YaHei" or other fonts
+'default nil :font "Courier New-12.0")
+
+;; Chinese Font
+(if window-system
+(set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")))
+ ;; Note: you can chang "Kaiti SC" to "Microsoft YaHei" or other fonts
 
 ;; Fonts in Mac OS X
-;(set-default-font "-apple-Monaco-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;(if window-system 
+; (set-face-attribute
+; 'default nil :font "Monaco 14"))
+;(if window-system 
+;(set-default-font "-apple-Monaco-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
 
 ;(if window-system 
 ;    (set-fontset-font
@@ -55,7 +58,7 @@
 (setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.8/emacs" load-path))
 (setq erlang-root-dir "/usr/local/lib/erlang")
 (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
-(require 'erlang-start)
+;(require 'erlang-start)
 
 
 ;;PHP mode
