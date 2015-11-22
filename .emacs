@@ -7,8 +7,16 @@
 
 ;; Chinese Font
 (if window-system
-(set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")))
- ;; Note: you can chang "Kaiti SC" to "Microsoft YaHei" or other fonts
+    (set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")))
+;; Note: you can chang "Kaiti SC" to "Microsoft YaHei" or other fonts
+
+(if window-system
+  ;;设置窗口位置为屏库左上角(0,0) 
+  (set-frame-position (selected-frame) 0 0) 
+  ;;设置宽和高,我的十寸小本是110,33,大家可以调整这个参数来适应自己屏幕大小 
+  (set-frame-width (selected-frame) 110) 
+  (set-frame-height (selected-frame) 33))
+ 
 
 ;; Fonts in Mac OS X
 ;(if window-system 
@@ -91,6 +99,11 @@
 (add-to-list 'ac-dictionary-directories ".emacs.d/elpa/auto-complete-20150408.1132/ac-dict")
 (ac-config-default)
 
+;; 启动窗口大小
+;(setq default-frame-alist
+;'((height . 34) (width . 80) (menu-bar-lines . 20) (tool-bar-lines . 0)))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -103,3 +116,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
