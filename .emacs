@@ -1,35 +1,20 @@
-;; --------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 ;; setting font for mac system
-;; --------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 ;; Setting English Font 
 (set-face-attribute
-'default nil :font "Courier New-12.0")
-
-;; Chinese Font
+ 'default nil :font "Monaco 14")
+;; Chinese Font 配制中文字体
 (if window-system
-    (set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")))
-;; Note: you can chang "Kaiti SC" to "Microsoft YaHei" or other fonts
+;;    (set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")))
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+			charset
+			(font-spec :family "PingFang SC" :size 14))))
 
-(if window-system
-  ;;设置窗口位置为屏库左上角(0,0) 
-  (set-frame-position (selected-frame) 0 0) 
-  ;;设置宽和高,我的十寸小本是110,33,大家可以调整这个参数来适应自己屏幕大小 
-  (set-frame-width (selected-frame) 110) 
-  (set-frame-height (selected-frame) 33))
- 
+;; Note: you can chang "PingFang SC" to "Microsoft YaHei" or other fonts
 
 ;; Fonts in Mac OS X
-;(if window-system 
-; (set-face-attribute
-; 'default nil :font "Monaco 14"))
-;(if window-system 
-;(set-default-font "-apple-Monaco-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
-
-;(if window-system 
-;    (set-fontset-font
-;     (frame-parameter nil 'font)
-;     'han
-;     (font-spec :family "Hiragino Sans GB" )))
 
 ;;参考  http://border.iteye.com/blog/119143
 
@@ -63,10 +48,10 @@
 ;(add-to-list 'load-path "~/.emacs.d/plugins")
 
 ;;Erlang mode
-(setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.8/emacs" load-path))
+(setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.8.1/emacs" load-path))
 (setq erlang-root-dir "/usr/local/lib/erlang")
 (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
-;(require 'erlang-start)
+(require 'erlang-start)
 
 
 ;;PHP mode
@@ -99,21 +84,30 @@
 (add-to-list 'ac-dictionary-directories ".emacs.d/elpa/auto-complete-20150408.1132/ac-dict")
 (ac-config-default)
 
-;; 启动窗口大小
-;(setq default-frame-alist
-;'((height . 34) (width . 80) (menu-bar-lines . 20) (tool-bar-lines . 0)))
 
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list
+   'package-archives
+   '("melpa" . "http://melpa.org/packages/")
+   t)
+  (add-to-list 'package-archives'
+	       ("elpa" . "http://tromey.com/elpa/") t)
+  (add-to-list 'package-archives'
+	       ("marmalade" . "http://marmalade-repo.org/packages/") t)
+  (add-to-list 'package-archives'
+	       ("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (package-initialize))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ '(ede-project-directories (quote ("/Volumes/MacintoshHD/qujian/user/lkghot/htdocs"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
