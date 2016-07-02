@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (21824 17717
-;;;;;;  0 0))
+;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (22280 32139
+;;;;;;  18701 682000))
 ;;; Generated autoloads from el-get/el-get.el
 
 (autoload 'el-get-version "el-get/el-get" "\
@@ -104,7 +104,7 @@ already installed packages is considered.
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-bundle" "el-get/el-get-bundle.el"
-;;;;;;  (21824 17716 0 0))
+;;;;;;  (22280 32139 18701 682000))
 ;;; Generated autoloads from el-get/el-get-bundle.el
 
 (autoload 'el-get-bundle-el-get "el-get/el-get-bundle" "\
@@ -153,8 +153,27 @@ required.
 
 ;;;***
 
+;;;### (autoloads nil "el-get/el-get-check" "el-get/el-get-check.el"
+;;;;;;  (22280 32139 18701 682000))
+;;; Generated autoloads from el-get/el-get-check.el
+
+(autoload 'el-get-check-recipe "el-get/el-get-check" "\
+Check the format of the recipe.
+Please run this command before sending a pull request.
+Usage: M-x el-get-check-recipe RET
+
+You can run this function from checker script like this:
+    test/check-recipe.el PATH/TO/RECIPE.rcp
+
+When used as a lisp function, FILE-OR-BUFFER must be a buffer
+object or a file path.
+
+\(fn FILE-OR-BUFFER)" t nil)
+
+;;;***
+
 ;;;### (autoloads nil "el-get/el-get-list-packages" "el-get/el-get-list-packages.el"
-;;;;;;  (21824 17717 0 0))
+;;;;;;  (22280 32139 18701 682000))
 ;;; Generated autoloads from el-get/el-get-list-packages.el
 
 (autoload 'el-get-list-packages "el-get/el-get-list-packages" "\
@@ -164,11 +183,36 @@ Display a list of packages.
 
 ;;;***
 
+;;;### (autoloads nil "php-mode/php-mode" "php-mode/php-mode.el"
+;;;;;;  (22280 33350 804860 316000))
+;;; Generated autoloads from php-mode/php-mode.el
+
+(let ((loads (get 'php 'custom-loads))) (if (member '"php-mode/php-mode" loads) nil (put 'php 'custom-loads (cons '"php-mode/php-mode" loads))))
+
+(defvar php-extra-constants 'nil "\
+A list of additional strings to treat as PHP constants.")
+
+(custom-autoload 'php-extra-constants "php-mode/php-mode" nil)
+
+(add-to-list 'interpreter-mode-alist (cons "php" 'php-mode))
+
+(autoload 'php-mode "php-mode/php-mode" "\
+Major mode for editing PHP code.
+
+\\{php-mode-map}
+
+\(fn)" t nil)
+
+(dolist (pattern '("\\.php[s345t]?\\'" "\\.phtml\\'" "/Amkfile\\'" "\\.amk\\'")) (add-to-list 'auto-mode-alist `(,pattern . php-mode) t))
+
+;;;***
+
 ;;;### (autoloads nil nil ("el-get/el-get-autoloading.el" "el-get/el-get-build.el"
 ;;;;;;  "el-get/el-get-byte-compile.el" "el-get/el-get-core.el" "el-get/el-get-custom.el"
 ;;;;;;  "el-get/el-get-dependencies.el" "el-get/el-get-install.el"
 ;;;;;;  "el-get/el-get-methods.el" "el-get/el-get-notify.el" "el-get/el-get-recipes.el"
-;;;;;;  "el-get/el-get-status.el") (21824 17718 541604 0))
+;;;;;;  "el-get/el-get-status.el" "php-mode/php-mode-test.el") (22280
+;;;;;;  33352 396453 119000))
 
 ;;;***
 
