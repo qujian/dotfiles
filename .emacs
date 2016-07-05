@@ -1,16 +1,24 @@
 ;; -----------------------------------------------------------------------------
 ;; setting font for mac system
 ;; -----------------------------------------------------------------------------
-;; Setting English Font 
+;; Setting English Font
 ;(set-face-attribute
+; 'default nil :font "Consolas-14.5")
 ; 'default nil :font "Monaco 14")
+
 ;; Chinese Font 配制中文字体
 (if window-system
-;;    (set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")))
+    (set-face-attribute 'default nil :font "Consolas-14.5"
+;    (set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")
+    )
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font)
 			charset
-			(font-spec :family "PingFang SC" :size 14))))
+			(font-spec :family "Consolas" :size 14)
+;			(font-spec :family "PingFang SC" :size 14)
+       )
+     )
+)
 
 ;; Note: you can chang "PingFang SC" to "Microsoft YaHei" or other fonts
 
