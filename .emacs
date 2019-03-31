@@ -56,29 +56,29 @@
 ;(add-to-list 'load-path "~/.emacs.d/plugins")
 
 ;;Erlang mode
-(setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.8.4/emacs" load-path))
+(setq load-path (cons "/usr/local/lib/erlang/lib/tools-3.0.2/emacs" load-path))
 (setq erlang-root-dir "/usr/local/lib/erlang")
 (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
 (require 'erlang-start)
 
 
 ;;PHP mode
-(add-to-list 'load-path ".emacs.d/plugins/php-mode-1.5.0")
-(require 'php-mode)
+;(add-to-list 'load-path ".emacs.d/plugins/php-mode-1.5.0")
+;(require 'php-mode)
 
 ;(autoload 'asp-mode "asp-mode")
 ;(setq auto-mode-alist 
 ;  (cons '("\\.asp\\'" . asp-mode) auto-mode-alist))
 
 ;;Markdown mode
-(add-to-list 'load-path ".emacs.d/plugins/markdown-mode")
-(require 'markdown-mode)
+;(add-to-list 'load-path ".emacs.d/plugins/markdown-mode")
+;(require 'markdown-mode)
 
-(autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+;(autoload 'markdown-mode "markdown-mode"
+;   "Major mode for editing Markdown files" t)
+;(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+;(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+;(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; MELPA repository - http://melpa.org
 (require 'package) ;; You might already have this line
@@ -127,3 +127,28 @@
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
+
+
+;; Language Server Protocol Tests
+(require 'lsp-mode)
+
+;; Enable code completion
+(require 'company-lsp)
+
+;; Connect to an already started language server
+(lsp-define-tcp-client
+ lsp-erlang-mode
+ "erlang"
+ (lambda () default-directory)
+ '("/usr/bin/false")
+ "localhost"
+ 9000)
+
+(add-hook 'erlang-mode-hook 'company-mode)
+(add-hook 'erlang-mode-hook (lambda ()
+                              (push 'company-lsp company-backends)))
+(add-hook 'erlang-mode-hook 'lsp-erlang-mode-enable)
+
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+(projectile-mode 1)
+(yas-global-mode 1)
