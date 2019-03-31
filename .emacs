@@ -2,23 +2,24 @@
 ;; setting font for mac system
 ;; -----------------------------------------------------------------------------
 ;; Setting English Font
-;(set-face-attribute
-; 'default nil :font "Consolas-14.5")
-; 'default nil :font "Monaco 14")
+(set-face-attribute 'default nil :font "SF Mono 14")
+; "Consolas-14.5"
+; "Monaco 14"
 
 ;; Chinese Font 配制中文字体
-(if window-system
-    (set-face-attribute 'default nil :font "Consolas-14.5"
-;    (set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf")
-    )
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font)
-			charset
-			(font-spec :family "Consolas" :size 14)
+;(if window-system
+    ;(set-face-attribute 'default nill :font "SF Mono 14")
+    ; (set-face-attribute 'default nil :font "PingFang SC" :size 14)
+;    (set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf"))
+
+;    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;      (set-fontset-font (frame-parameter nil 'font)
+;			charset
+;			(font-spec :family "Consolas" :size 14)
 ;			(font-spec :family "PingFang SC" :size 14)
-       )
-     )
-)
+;       )
+;     )
+;)
 
 ;; Note: you can chang "PingFang SC" to "Microsoft YaHei" or other fonts
 
@@ -27,10 +28,6 @@
 ;;参考  http://border.iteye.com/blog/119143
 
 (setq default-directory "~/")
-
-(add-to-list 'custom-theme-load-path ".emacs.d/themes/molokai-theme/")
-;(setq molokai-theme-kit t)
-(load-theme 'molokai t)
 
 ;; 去掉toolbar
 (if window-system  (tool-bar-mode 0))
@@ -52,15 +49,15 @@
 ;(global-set-key (kbd "C-c") 'set-mark-command)
 ;;参考 http://border.iteye.com/blog/119143
 
+
 ;;Load plugins
 ;(add-to-list 'load-path "~/.emacs.d/plugins")
 
 ;;Erlang mode
-(setq load-path (cons "/usr/local/lib/erlang/lib/tools-3.0.2/emacs" load-path))
-(setq erlang-root-dir "/usr/local/lib/erlang")
-(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
-(require 'erlang-start)
-
+;(setq load-path (cons "/usr/local/lib/erlang/lib/tools-3.0.2/emacs" load-path))
+;(setq erlang-root-dir "/usr/local/lib/erlang")
+;(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
+;(require 'erlang-start)
 
 ;;PHP mode
 ;(add-to-list 'load-path ".emacs.d/plugins/php-mode-1.5.0")
@@ -87,10 +84,10 @@
 (package-initialize) ;; You might already have this line
 
 ;;auto-complete
-(add-to-list 'load-path ".emacs.d/elpa/auto-complete-20150408.1132/")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories ".emacs.d/elpa/auto-complete-20150408.1132/ac-dict")
-(ac-config-default)
+;(add-to-list 'load-path ".emacs.d/elpa/auto-complete-20150408.1132/")
+;(require 'auto-complete-config)
+;(add-to-list 'ac-dictionary-directories ".emacs.d/elpa/auto-complete-20150408.1132/ac-dict")
+;(ac-config-default)
 
 
 (when (>= emacs-major-version 24)
@@ -107,48 +104,42 @@
 	       ("melpa" . "http://melpa.milkbox.net/packages/") t)
   (package-initialize))
 
-;(custom-set-variables
-'(ede-project-directories (quote ("/Volumes/MacintoshHD/qujian/user/lkghot/htdocs")))
-;)
+(add-to-list 'custom-theme-load-path "~/.emacs/elpa/color-theme-solarized-20171024.1525/")
+(set-frame-parameter nil 'background-mode 'dark)
+(load-theme 'solarized t)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (color-theme-solarized))))
 ;(custom-set-faces
 ; )
 
 ;;php-mode-improve
 (setq c-default-style "linux")
 
-;;el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
-
-
 ;; Language Server Protocol Tests
-(require 'lsp-mode)
+;(require 'lsp-mode)
 
 ;; Enable code completion
-(require 'company-lsp)
+;(require 'company-lsp)
 
 ;; Connect to an already started language server
-(lsp-define-tcp-client
- lsp-erlang-mode
- "erlang"
- (lambda () default-directory)
- '("/usr/bin/false")
- "localhost"
- 9000)
+;(lsp-define-tcp-client
+; lsp-erlang-mode
+; "erlang"
+; (lambda () default-directory)
+; '("/usr/bin/false")
+; "localhost"
+; 9000)
 
-(add-hook 'erlang-mode-hook 'company-mode)
-(add-hook 'erlang-mode-hook (lambda ()
-                              (push 'company-lsp company-backends)))
-(add-hook 'erlang-mode-hook 'lsp-erlang-mode-enable)
+;(add-hook 'erlang-mode-hook 'company-mode)
+;(add-hook 'erlang-mode-hook (lambda ()
+;                              (push 'company-lsp company-backends)))
+;(add-hook 'erlang-mode-hook 'lsp-erlang-mode-enable)
 
-(add-hook 'js2-mode-hook 'ac-js2-mode)
-(projectile-mode 1)
-(yas-global-mode 1)
+;(add-hook 'js2-mode-hook 'ac-js2-mode)
+;(projectile-mode 1)
+;(yas-global-mode 1)
