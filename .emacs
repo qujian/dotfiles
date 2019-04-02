@@ -6,32 +6,12 @@
 ; "Consolas-14.5"
 ; "Monaco 14"
 
-;; Chinese Font 配制中文字体
-;(if window-system
-    ;(set-face-attribute 'default nill :font "SF Mono 14")
-    ; (set-face-attribute 'default nil :font "PingFang SC" :size 14)
-;    (set-fontset-font "fontset-default" 'unicode '("WenQuanYi Zen Hei" . "unicode-ttf"))
-
-;    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-;      (set-fontset-font (frame-parameter nil 'font)
-;			charset
-;			(font-spec :family "Consolas" :size 14)
-;			(font-spec :family "PingFang SC" :size 14)
-;       )
-;     )
-;)
-
-;; Note: you can chang "PingFang SC" to "Microsoft YaHei" or other fonts
-
-;; Fonts in Mac OS X
-
-;;参考  http://border.iteye.com/blog/119143
-
 (setq default-directory "~/")
 
 ;; 去掉toolbar
 (if window-system  (tool-bar-mode 0))
-
+;; 用空格替代Tab
+(setq-default indent-tabs-mode nil);
 ;; 显示行号
 (global-linum-mode t)
 
@@ -44,6 +24,8 @@
 ;;不产生备份文件
 (setq make-backup-files nil)
 
+;;隐藏scroll-bar
+(setq scroll-bar-mode nil)
 ;;Linux special config to enable Ctrl-Space command
 ;(global-unset-key (kbd "C-SPC"))
 ;(global-set-key (kbd "C-c") 'set-mark-command)
@@ -54,10 +36,10 @@
 ;(add-to-list 'load-path "~/.emacs.d/plugins")
 
 ;;Erlang mode
-;(setq load-path (cons "/usr/local/lib/erlang/lib/tools-3.0.2/emacs" load-path))
-;(setq erlang-root-dir "/usr/local/lib/erlang")
-;(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
-;(require 'erlang-start)
+(setq load-path (cons "/usr/local/lib/erlang/lib/tools-3.1/emacs" load-path))
+(setq erlang-root-dir "/usr/local/lib/erlang")
+(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
+(require 'erlang-start)
 
 ;;PHP mode
 ;(add-to-list 'load-path ".emacs.d/plugins/php-mode-1.5.0")
@@ -104,24 +86,11 @@
 	       ("melpa" . "http://melpa.milkbox.net/packages/") t)
   (package-initialize))
 
-(add-to-list 'custom-theme-load-path "~/.emacs/elpa/color-theme-solarized-20171024.1525/")
-(set-frame-parameter nil 'background-mode 'dark)
-(load-theme 'solarized t)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (color-theme-solarized))))
-;(custom-set-faces
-; )
-
 ;;php-mode-improve
 (setq c-default-style "linux")
 
 ;; Language Server Protocol Tests
-;(require 'lsp-mode)
+(require 'lsp-mode)
 
 ;; Enable code completion
 ;(require 'company-lsp)
@@ -142,4 +111,22 @@
 
 ;(add-hook 'js2-mode-hook 'ac-js2-mode)
 ;(projectile-mode 1)
-;(yas-global-mode 1)
+                                        ;(yas-global-mode 1)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(frame-background-mode (quote dark))
+ '(package-selected-packages (quote (lsp-mode color-theme-solarized))))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(add-to-list 'custom-theme-load-path "~/.emacs/elpa/color-theme-solarized-20171024.1525/")
+(load-theme 'solarized t)
