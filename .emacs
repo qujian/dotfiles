@@ -2,14 +2,18 @@
 ;; setting font for mac system
 ;; -----------------------------------------------------------------------------
 ;; Setting English Font
-(set-face-attribute 'default nil :font "SF Mono 14")
+;(set-face-attribute 'default nil :font "SF Mono 14")
 ; "Consolas-14.5"
 ; "Monaco 14"
 
 (setq default-directory "~/")
 
 ;; 去掉toolbar
-(if window-system  (tool-bar-mode 0))
+;;隐藏scroll-bar
+(when window-system
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0))
+
 ;; 用空格替代Tab
 (setq-default indent-tabs-mode nil);
 ;; 显示行号
@@ -24,22 +28,20 @@
 ;;不产生备份文件
 (setq make-backup-files nil)
 
-;;隐藏scroll-bar
-(setq scroll-bar-mode nil)
+
 ;;Linux special config to enable Ctrl-Space command
 ;(global-unset-key (kbd "C-SPC"))
 ;(global-set-key (kbd "C-c") 'set-mark-command)
 ;;参考 http://border.iteye.com/blog/119143
 
-
 ;;Load plugins
 ;(add-to-list 'load-path "~/.emacs.d/plugins")
 
 ;;Erlang mode
-(setq load-path (cons "/usr/local/lib/erlang/lib/tools-3.1/emacs" load-path))
-(setq erlang-root-dir "/usr/local/lib/erlang")
-(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
-(require 'erlang-start)
+;(setq load-path (cons "/usr/local/lib/erlang/lib/tools-3.1/emacs" load-path))
+;(setq erlang-root-dir "/usr/local/lib/erlang")
+;(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
+;(require 'erlang-start)
 
 ;;PHP mode
 ;(add-to-list 'load-path ".emacs.d/plugins/php-mode-1.5.0")
@@ -63,7 +65,7 @@
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
-(package-initialize) ;; You might already have this line
+;(package-initialize) ;; You might already have this line
 
 ;;auto-complete
 ;(add-to-list 'load-path ".emacs.d/elpa/auto-complete-20150408.1132/")
@@ -71,26 +73,24 @@
 ;(add-to-list 'ac-dictionary-directories ".emacs.d/elpa/auto-complete-20150408.1132/ac-dict")
 ;(ac-config-default)
 
-
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
-  (add-to-list 'package-archives'
-	       ("elpa" . "http://tromey.com/elpa/") t)
-  (add-to-list 'package-archives'
-	       ("marmalade" . "http://marmalade-repo.org/packages/") t)
-  (add-to-list 'package-archives'
-	       ("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (package-initialize))
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("melpa" . "http://melpa.org/packages/")
+ t)
+(add-to-list 'package-archives'
+	     ("elpa" . "http://tromey.com/elpa/") t)
+(add-to-list 'package-archives'
+	     ("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives'
+	     ("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
 
 ;;php-mode-improve
 (setq c-default-style "linux")
 
 ;; Language Server Protocol Tests
-(require 'lsp-mode)
+;(require 'lsp-mode)
 
 ;; Enable code completion
 ;(require 'company-lsp)
