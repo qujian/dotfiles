@@ -28,6 +28,10 @@
 ;;不产生备份文件
 (setq make-backup-files nil)
 
+(setq default-tab-width 4)
+(setq-default indent-tabs-mode nil)
+(setq c-default-style "Linux")
+(setq c-basic-offset 4)
 
 ;;Linux special config to enable Ctrl-Space command
 ;(global-unset-key (kbd "C-SPC"))
@@ -129,4 +133,5 @@
  )
 
 (add-to-list 'custom-theme-load-path "~/.emacs/elpa/color-theme-solarized-20171024.1525/")
-(load-theme 'solarized t)
+(if window-system
+    (load-theme 'solarized t))
