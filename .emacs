@@ -132,6 +132,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/color-theme-solarized-20120301/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/color-theme-solarized-20171024.1525/")
 (if window-system
-    (load-theme 'solarized-dark t))
+    (load-theme 'solarized t))
